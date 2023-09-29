@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sınav</title>
+    <!-- Bootstrap CSS dosyasını ekleyin -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Ana Sayfa</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% if isLogin %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/question">Sınav</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard">Lider Tablosu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Çıkış Yap</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Kayıt Ol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Giriş Yap</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container mt-5">
+        <h1 class="text-center">Sınav</h1>
+        <h2 class="text-center">Toplam Puan: {{ session['total_score'] }}</h2>
+        <form method="POST" class="text-center">
+            <h3>{{ question['question'] }}</h3>
+            {% for option in question['options'] %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" id="{{ option }}" value="{{ option }}">
+                <label class="form-check-label" for="{{ option }}">{{ option }}</label>
+            </div>
+            {% endfor %}
+            <input type="hidden" name="correct_answer" value="{{ question['correct_answer'] }}">
+            <button type="submit" class="btn btn-primary mt-3">Cevapla</button>
+        </form>
+    </div>
+    
+    <footer class="text-center mt-5">
+        <p>Developed by [Betül Topkan]</p>
+    </footer>
+
+    <!-- Bootstrap JS dosyasını ve jQuery'i ekleyin -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
